@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MPFinalPro</string>
+
+    <string name="link">http://trefle.io/api/plants</string>
 </resources>
