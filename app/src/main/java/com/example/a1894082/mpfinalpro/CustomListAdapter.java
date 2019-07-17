@@ -9,35 +9,34 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-//import com.squareup.picasso.Picasso;
+public class CustomListAdapter  extends BaseAdapter {
 
-public class ListAdapter extends BaseAdapter {
     Context c;
-    ArrayList<Repositories_Git> reposit;
+    ArrayList<Repositories> pro;
 
     LayoutInflater inflater;
 
-    public ListAdapter(Context c, ArrayList<Repositories_Git> pro) {
+    public CustomListAdapter(Context c, ArrayList<Repositories> pro) {
         this.c = c;
-        this.reposit = reposit;
+        this.pro = pro;
     }
 
     public Context getC() {
         return c;
     }
 
-    public ArrayList<Repositories_Git> getPro() {
-        return reposit;
+    public ArrayList<Repositories> getPro() {
+        return pro;
     }
 
     @Override
     public int getCount() {
-        return reposit.size();
+        return pro.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return reposit.get(position);
+        return pro.get(position);
     }
 
     @Override
@@ -55,16 +54,17 @@ public class ListAdapter extends BaseAdapter {
 
         if(convertView  ==  null)
         {
-            convertView = inflater.inflate(R.layout.repo_list,parent,false);
+            convertView = inflater.inflate(R.layout.repo_list_items,parent,false);
         }
 
-        //ImageView pimg = convertView.findViewById(R.id.descrip_img);
-        TextView Name  = convertView.findViewById(R.id.reposit_name);
 
-        //Picasso.get().load(reposit.get(position).getPimg()).into(pimg);
-        Name.setText(reposit.get(position).getName());
+        TextView pname  = convertView.findViewById(R.id.textView);
+
+         //Picasso.get().load(pro.get(position).getPimg()).into(pimg);
+        pname.setText(pro.get(position).getPname());
 
 
         return convertView;
+
     }
 }

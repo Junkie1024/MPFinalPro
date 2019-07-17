@@ -4,22 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_img"
     android:orientation="vertical"
     android:padding="10dp"
     android:layout_margin="10dp"
-    tools:context=".Repo_Descrip">
+    tools:context=".Repo_description">
 
-    <ImageView
-        android:id="@+id/descrip_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        tools:srcCompat="@tools:sample/avatars[0]" />
+
 
     <TextView
-        android:id="@+id/reposit_name"
+        android:id="@+id/rname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -27,14 +20,10 @@
         android:textSize="20dp"
         android:text="TextView" />
 
-<ScrollView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/plant_genus"
+        android:id="@+id/fullrname"
         android:layout_margin="10dp"
         android:layout_gravity="center"
         android:text="TextView"
@@ -45,37 +34,20 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_gravity="center"
-        android:id="@+id/plant_kingdom"
+        android:id="@+id/oname"
         android:text="TextView"
         />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/plant_subkingdom"
+        android:id="@+id/lurl"
         android:layout_margin="10dp"
         android:layout_gravity="center"
         android:text="TextView"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:id="@+id/plant_division"
-        android:text="TextView"
-        />
 
 
-        <TextView
-            android:id="@+id/plant_family"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
-            android:text="TextView"
-            />
-
-</ScrollView>
 
 </LinearLayout>

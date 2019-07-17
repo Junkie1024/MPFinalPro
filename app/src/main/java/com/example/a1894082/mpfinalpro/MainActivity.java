@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,36 +20,109 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity {
 
     ListView pltlst;
-    ListAdapter plt;
-    ArrayList<Repositories_Git> pnt;
 
-    private static int SPLASH_SCREEN_TIME_OUT=2000;
+    CustomListAdapter adapt;
+    ArrayList<Repositories> pro;
 
+    String Oname = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        //This method is used so that your splash activity
-        //can cover the entire screen.
-
         setContentView(R.layout.activity_main);
-        //this will bind your MainActivity.class file with activity_main.
+        pltlst = findViewById(R.id.reposlist);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i=new Intent(MainActivity.this,
-                        Repositories_List.class);
-                //Intent is used to switch from one activity to another.
+        String ls = getResources().getString(R.string.link);
 
-                startActivity(i);
-                //invoke the SecondActivity.
+        pro =  new ArrayList<>();
 
-                finish();
-                //the current activity will get finished.
+        if(getIntent().getStringExtra("OwnerName")!=null){
+            Oname = getIntent().getStringExtra("OwnerName");
+        }
+        if(Oname != ""){
+
+        }
+        else {
+            try {
+                String mysts =  new AsyncroData().execute(ls).get();
+
+                System.out.println("This is from MainActivity:"+mysts);
+                mysts = "{\"Name\":" +mysts+"}";
+                JSONObject mainobj =  new JSONObject(mysts);
+
+                JSONArray proarray = mainobj.getJSONArray("Name");
+
+/*
+            JSONObject object = (JSONObject) new JSONTokener(ls).nextValue();
+            String query = object.getString("query");
+            JSONArray locations = object.getJSONArray("login");
+            System.out.println("Owner login name:"+locations);*/
+
+                for (int i=0;i<proarray.length();i++ )
+                {
+                    JSONObject childobj = proarray.getJSONObject(i);
+
+
+
+                    String pname = childobj.getString("name");
+                    String plink = (String) childobj.getString("owner");
+
+
+
+
+
+                    JSONObject jObject = new JSONObject(plink);
+
+                    String oname = jObject.getString("login");
+
+                    String langurl = jObject.getString("login");
+
+
+
+
+
+
+                    System.out.println(oname);
+
+                    pro.add(new Repositories(pname,oname,langurl,oname));
+
+                    System.out.println("names : "+childobj.getString("name"));
+                }
+
+
+
+                System.out.println("ArrayList size: "+pro.size());
+
+
+                adapt =  new CustomListAdapter(MainActivity.this,pro);
+
+                pltlst.setAdapter(adapt);
+
+                pltlst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Toast.makeText(MainActivity.this,pro.get(position).getPname(),Toast.LENGTH_LONG).show();
+
+                        Bundle bundle =  new Bundle();
+                        bundle.putParcelable("data",pro.get(position));
+
+
+                        Intent i = new Intent(MainActivity.this,Repo_description.class);
+                        i.putExtra("data",pro.get(position));
+                        startActivity(i);
+                    }
+                });
+
+
+
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }, SPLASH_SCREEN_TIME_OUT);
+        }
+
     }
 }
