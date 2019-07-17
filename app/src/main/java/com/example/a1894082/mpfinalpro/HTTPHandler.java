@@ -23,7 +23,7 @@ public class HTTPHandler {
             URL url = new URL(rurl);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();//connecting and casting
             con.setRequestMethod("GET");
-            con.setRequestProperty("Authorization", "NXk5ZkdmZUZPYTFndjc2RWx2RjNyQT09");
+            con.setRequestProperty("Context-Type","application/json");
 
 
             //Read response
