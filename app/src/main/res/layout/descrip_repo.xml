@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:layout_margin="10dp"
-    tools:context=".PlantDescription">
+    tools:context=".Repo_Descrip">
 
     <ImageView
         android:id="@+id/descrip_img"
@@ -19,7 +19,7 @@
         tools:srcCompat="@tools:sample/avatars[0]" />
 
     <TextView
-        android:id="@+id/plant_name"
+        android:id="@+id/reposit_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"

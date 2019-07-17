@@ -13,31 +13,31 @@ import java.util.ArrayList;
 
 public class ListAdapter extends BaseAdapter {
     Context c;
-    ArrayList<Plants> plnt;
+    ArrayList<Repositories_Git> reposit;
 
     LayoutInflater inflater;
 
-    public ListAdapter(Context c, ArrayList<Plants> pro) {
+    public ListAdapter(Context c, ArrayList<Repositories_Git> pro) {
         this.c = c;
-        this.plnt = plnt;
+        this.reposit = reposit;
     }
 
     public Context getC() {
         return c;
     }
 
-    public ArrayList<Plants> getPro() {
-        return plnt;
+    public ArrayList<Repositories_Git> getPro() {
+        return reposit;
     }
 
     @Override
     public int getCount() {
-        return plnt.size();
+        return reposit.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return plnt.get(position);
+        return reposit.get(position);
     }
 
     @Override
@@ -55,14 +55,14 @@ public class ListAdapter extends BaseAdapter {
 
         if(convertView  ==  null)
         {
-            convertView = inflater.inflate(R.layout.list_plants,parent,false);
+            convertView = inflater.inflate(R.layout.repo_list,parent,false);
         }
 
         //ImageView pimg = convertView.findViewById(R.id.descrip_img);
-        TextView Name  = convertView.findViewById(R.id.plnt_name);
+        TextView Name  = convertView.findViewById(R.id.reposit_name);
 
-        //Picasso.get().load(plnt.get(position).getPimg()).into(pimg);
-        Name.setText(plnt.get(position).getName());
+        //Picasso.get().load(reposit.get(position).getPimg()).into(pimg);
+        Name.setText(reposit.get(position).getName());
 
 
         return convertView;

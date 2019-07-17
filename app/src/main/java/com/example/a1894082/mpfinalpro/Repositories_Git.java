@@ -3,28 +3,28 @@ package com.example.a1894082.mpfinalpro;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Plants implements Parcelable {
+public class Repositories_Git implements Parcelable {
     String name,link;
 
-    public Plants(String name, String link) {
+    public Repositories_Git(String name, String link) {
         this.name = name;
         this.link = link;
     }
 
-    protected Plants(Parcel in) {
+    protected Repositories_Git(Parcel in) {
         name = in.readString();
         link = in.readString();
     }
 
-    public static final Creator<Plants> CREATOR = new Creator<Plants>() {
+    public static final Creator<Repositories_Git> CREATOR = new Creator<Repositories_Git>() {
         @Override
-        public Plants createFromParcel(Parcel in) {
-            return new Plants(in);
+        public Repositories_Git createFromParcel(Parcel in) {
+            return new Repositories_Git(in);
         }
 
         @Override
-        public Plants[] newArray(int size) {
-            return new Plants[size];
+        public Repositories_Git[] newArray(int size) {
+            return new Repositories_Git[size];
         }
     };
 
