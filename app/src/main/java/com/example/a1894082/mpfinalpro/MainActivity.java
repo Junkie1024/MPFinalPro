@@ -2,8 +2,10 @@ package com.example.a1894082.mpfinalpro;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -20,76 +22,33 @@ public class MainActivity extends AppCompatActivity {
     ListAdapter plt;
     ArrayList<Repositories_Git> pnt;
 
+    private static int SPLASH_SCREEN_TIME_OUT=2000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //This method is used so that your splash activity
+        //can cover the entire screen.
+
         setContentView(R.layout.activity_main);
+        //this will bind your MainActivity.class file with activity_main.
 
-        pltlst = findViewById(R.id.plants_list);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i=new Intent(MainActivity.this,
+                        Repositories_List.class);
+                //Intent is used to switch from one activity to another.
 
-        String ls = getResources().getString(R.string.link);
+                startActivity(i);
+                //invoke the SecondActivity.
 
-        pnt = new ArrayList<>();
-
-        try {
-            String mysts = new AsyncroData().execute(ls).get();
-
-            System.out.println("This is from MainActivity:" + mysts);
-
-            mysts = "{\"Name\":" +mysts+"}";
-
-            JSONObject mainobj = new JSONObject(mysts);
-
-            JSONArray proarray = mainobj.getJSONArray("Name");
-
-            for (int i = 0; i < proarray.length(); i++) {
-                JSONObject childobj = proarray.getJSONObject(i);
-
-                String name = childobj.getString("name");
-
-                String link  = childobj.getString("full_name");
-
-
-                pnt.add(new Repositories_Git(name,link));
-
-
+                finish();
+                //the current activity will get finished.
             }
-
-            System.out.println("ArrayList size: " + pnt.size());
-
-
-            plt = new ListAdapter(MainActivity.this, pnt);
-
-            pltlst.setAdapter(plt);
-
-
-            pltlst.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-                @Override
-
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //Toast.makeText(MainActivity.this, pnt.get(position).getname(), Toast.LENGTH_LONG).show();
-
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("data", pnt.get(position));
-
-
-
-
-
-                    Intent i = new Intent(MainActivity.this, Repo_Descrip.class);
-                    i.putExtra("data", pnt.get(position));
-                    startActivity(i);
-                }
-            });
-
-
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
+        }, SPLASH_SCREEN_TIME_OUT);
     }
 }

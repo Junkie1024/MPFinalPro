@@ -4,16 +4,20 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Repositories_Git implements Parcelable {
-    String name,link;
+    String name,lang,cont,ownerdetails;
 
-    public Repositories_Git(String name, String link) {
+    public Repositories_Git(String name, String lang, String cont, String ownerdetails) {
         this.name = name;
-        this.link = link;
+        this.lang = lang;
+        this.cont = cont;
+        this.ownerdetails = ownerdetails;
     }
 
     protected Repositories_Git(Parcel in) {
         name = in.readString();
-        link = in.readString();
+        lang = in.readString();
+        cont = in.readString();
+        ownerdetails = in.readString();
     }
 
     public static final Creator<Repositories_Git> CREATOR = new Creator<Repositories_Git>() {
@@ -36,13 +40,34 @@ public class Repositories_Git implements Parcelable {
         this.name = name;
     }
 
-    public String getLink() {
-        return link;
+    public String getLang() {
+        return lang;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setLang(String lang) {
+        this.lang = lang;
     }
+
+    public String getCont() {
+        return cont;
+    }
+
+    public void setCont(String cont) {
+        this.cont = cont;
+    }
+
+    public String getOwnerdetails() {
+        return ownerdetails;
+    }
+
+    public void setOwnerdetails(String ownerdetails) {
+        this.ownerdetails = ownerdetails;
+    }
+
+    public static Creator<Repositories_Git> getCREATOR() {
+        return CREATOR;
+    }
+
 
     @Override
     public int describeContents() {
@@ -50,8 +75,7 @@ public class Repositories_Git implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeString(link);
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }
