@@ -5,13 +5,22 @@ import android.os.Parcelable;
 
 public class Repositories implements Parcelable {
 
-    String pname , plink,langurl,ownername ;
+    String pname , full_name , ownername, langurl, url ;
+
+    public Repositories(String pname, String full_name, String ownername, String langurl, String url) {
+        this.pname = pname;
+        this.full_name = full_name;
+        this.ownername = ownername;
+        this.langurl = langurl;
+        this.url = url;
+    }
 
     protected Repositories(Parcel in) {
         pname = in.readString();
-        plink = in.readString();
-        langurl = in.readString();
+        full_name = in.readString();
         ownername = in.readString();
+        langurl = in.readString();
+        url = in.readString();
     }
 
     public static final Creator<Repositories> CREATOR = new Creator<Repositories>() {
@@ -34,20 +43,12 @@ public class Repositories implements Parcelable {
         this.pname = pname;
     }
 
-    public String getPlink() {
-        return plink;
+    public String getFull_name() {
+        return full_name;
     }
 
-    public void setPlink(String plink) {
-        this.plink = plink;
-    }
-
-    public String getLangurl() {
-        return langurl;
-    }
-
-    public void setLangurl(String langurl) {
-        this.langurl = langurl;
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
     }
 
     public String getOwnername() {
@@ -58,12 +59,22 @@ public class Repositories implements Parcelable {
         this.ownername = ownername;
     }
 
-    public Repositories(String pname, String plink, String langurl, String ownername) {
-        this.pname = pname;
-        this.plink = plink;
-        this.langurl = langurl;
-        this.ownername = ownername;
+    public String getLangurl() {
+        return langurl;
     }
+
+    public void setLangurl(String langurl) {
+        this.langurl = langurl;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
 
     @Override
     public int describeContents() {
@@ -71,10 +82,11 @@ public class Repositories implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(pname);
-        dest.writeString(plink);
-        dest.writeString(langurl);
-        dest.writeString(ownername);
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(pname);
+        parcel.writeString(full_name);
+        parcel.writeString(ownername);
+        parcel.writeString(langurl);
+        parcel.writeString(url);
     }
 }

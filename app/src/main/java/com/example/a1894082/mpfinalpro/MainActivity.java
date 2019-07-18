@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         pro =  new ArrayList<>();
 
-        if(getIntent().getStringExtra("OwnerName")!=null){
+        if(getIntent().getStringExtra("OwnerRepo")!=null){
             Oname = getIntent().getStringExtra("OwnerName");
         }
         if(Oname != ""){
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     String pname = childobj.getString("name");
+                    String Full_name = childobj.getString("full_name");
                     String plink = (String) childobj.getString("owner");
 
 
@@ -75,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
 
                     String oname = jObject.getString("login");
 
-                    String langurl = jObject.getString("login");
+                    String url = jObject.getString("url");
+
+                    String langurl = childobj.getString("languages_url");
 
 
 
@@ -84,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
                     System.out.println(oname);
 
-                    pro.add(new Repositories(pname,oname,langurl,oname));
+                    pro.add(new Repositories(pname,Full_name,oname,langurl,url));
 
                     System.out.println("names : "+childobj.getString("name"));
                 }
@@ -101,11 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 pltlst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(MainActivity.this,pro.get(position).getPname(),Toast.LENGTH_LONG).show();
-
-                        Bundle bundle =  new Bundle();
-                        bundle.putParcelable("data",pro.get(position));
-
+                        //Toast.makeText(MainActivity.this,pro.get(position).getPname(),Toast.LENGTH_LONG).show();
 
                         Intent i = new Intent(MainActivity.this,Repo_description.class);
                         i.putExtra("data",pro.get(position));

@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_gravity="center"
-        android:textSize="20dp"
+        android:textSize="40sp"
         android:text="TextView" />
 
     <TextView
@@ -26,6 +26,7 @@
         android:id="@+id/fullrname"
         android:layout_margin="10dp"
         android:layout_gravity="center"
+        android:textSize="40sp"
         android:text="TextView"
         />
 
@@ -34,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_gravity="center"
+        android:textSize="40sp"
         android:id="@+id/oname"
         android:text="TextView"
         />
@@ -45,6 +47,7 @@
         android:id="@+id/lurl"
         android:layout_margin="10dp"
         android:layout_gravity="center"
+        android:textSize="25sp"
         android:text="TextView"
         />
 
