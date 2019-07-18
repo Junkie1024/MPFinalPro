@@ -18,7 +18,7 @@ public class HTTPHandler {
 
     public String makeServiceCall(String rurl) {
         String response = null;
-
+// http call
         try {
             URL url = new URL(rurl);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();//connecting and casting
