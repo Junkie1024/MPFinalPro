@@ -12,6 +12,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
+/*
+this class shows repositories description
+ */
 
 public class Repo_description extends AppCompatActivity {
 
