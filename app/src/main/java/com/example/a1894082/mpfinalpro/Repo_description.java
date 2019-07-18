@@ -34,13 +34,13 @@ public class Repo_description extends AppCompatActivity {
 
         final String url = p.getUrl();
 
-        rname.setText(p.getPname());
+        rname.setText("Repo Name: "+ p.getPname());
 
-        fullrname.setText(p.getFull_name());
+        fullrname.setText("Full name: "+p.getFull_name());
 
-        lurl.setText(p.getLangurl());
+        lurl.setText("Link: "+p.getLangurl());
 
-        oname.setText(p.getOwnername());
+        oname.setText("Owner Name:"+p.getOwnername());
 
         oname.setOnClickListener(new View.OnClickListener() {
             @Override
