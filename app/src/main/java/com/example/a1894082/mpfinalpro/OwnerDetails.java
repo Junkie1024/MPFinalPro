@@ -74,20 +74,5 @@ public class OwnerDetails extends AppCompatActivity {
 
         Picasso.get().load(Oimg).into(img_Owner);
 
-        txt_PublicRepo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                //Toast.makeText(OwnerDetails.this,"Test",Toast.LENGTH_LONG).show();
-
-                Intent i = new Intent(OwnerDetails.this,MainActivity.class);
-                i.putExtra("OwnerRepo",Repo_url);
-                startActivity(i);
-
-            }
-        });
-
-
-
     }
 }

@@ -7,6 +7,8 @@ public class Repositories implements Parcelable {
 
     String pname , full_name , ownername, langurl, url ;
 
+
+
     public Repositories(String pname, String full_name, String ownername, String langurl, String url) {
         this.pname = pname;
         this.full_name = full_name;

@@ -36,13 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         pro =  new ArrayList<>();
 
-        if(getIntent().getStringExtra("OwnerRepo")!=null){
-            Oname = getIntent().getStringExtra("OwnerName");
-        }
-        if(Oname != ""){
 
-        }
-        else {
             try {
                 String mysts =  new AsyncroData().execute(ls).get();
 
@@ -106,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         //Toast.makeText(MainActivity.this,pro.get(position).getPname(),Toast.LENGTH_LONG).show();
 
+                        Bundle bundle =  new Bundle();
+                        bundle.putParcelable("data",pro.get(position));
+
+
                         Intent i = new Intent(MainActivity.this,Repo_description.class);
                         i.putExtra("data",pro.get(position));
                         startActivity(i);
@@ -121,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
 
     }
 }
