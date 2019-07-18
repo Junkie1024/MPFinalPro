@@ -36,13 +36,55 @@ public class MainActivity extends AppCompatActivity {
 
         pro =  new ArrayList<>();
 
+        if (getIntent().getStringExtra("OwnerRepo") != null){
+            String Url = getIntent().getStringExtra("OwnerRepo");
+            //Toast.makeText(MainActivity.this,Url,Toast.LENGTH_LONG).show();
 
             try {
-                String mysts =  new AsyncroData().execute(ls).get();
 
-                System.out.println("This is from MainActivity:"+mysts);
-                mysts = "{\"Name\":" +mysts+"}";
-                JSONObject mainobj =  new JSONObject(mysts);
+                String Public_Repo = new AsyncroData().execute(Url).get();
+               // Toast.makeText(MainActivity.this,Public_Repo,Toast.LENGTH_LONG).show();
+                Public_Repo ="{\"Repo\":" + Public_Repo +"}";
+
+                JSONObject OwnerRepo = new JSONObject(Public_Repo);
+
+                JSONArray RepoArray = OwnerRepo.getJSONArray("Repo");
+
+                String test = "Total " + RepoArray.length();
+
+                //Toast.makeText(MainActivity.this,test,Toast.LENGTH_LONG).show();
+
+                for (int i = 0; i < RepoArray.length(); i++){
+
+                    JSONObject childobj = RepoArray.getJSONObject(i);
+
+                    String RepoName = childobj.getString("name");
+
+                    pro.add(new Repositories(RepoName));
+                }
+
+                adapt = new CustomListAdapter(MainActivity.this, pro);
+
+                pltlst.setAdapter(adapt);
+
+
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else {
+            try {
+
+                String mysts = new AsyncroData().execute(ls).get();
+
+                System.out.println("This is from MainActivity:" + mysts);
+                mysts = "{\"Name\":" + mysts + "}";
+                JSONObject mainobj = new JSONObject(mysts);
 
                 JSONArray proarray = mainobj.getJSONArray("Name");
 
@@ -52,18 +94,13 @@ public class MainActivity extends AppCompatActivity {
             JSONArray locations = object.getJSONArray("login");
             System.out.println("Owner login name:"+locations);*/
 
-                for (int i=0;i<proarray.length();i++ )
-                {
+                for (int i = 0; i < proarray.length(); i++) {
                     JSONObject childobj = proarray.getJSONObject(i);
-
 
 
                     String pname = childobj.getString("name");
                     String Full_name = childobj.getString("full_name");
                     String plink = (String) childobj.getString("owner");
-
-
-
 
 
                     JSONObject jObject = new JSONObject(plink);
@@ -75,23 +112,18 @@ public class MainActivity extends AppCompatActivity {
                     String langurl = childobj.getString("languages_url");
 
 
-
-
-
-
                     System.out.println(oname);
 
-                    pro.add(new Repositories(pname,Full_name,oname,langurl,url));
+                    pro.add(new Repositories(pname, Full_name, oname, langurl, url));
 
-                    System.out.println("names : "+childobj.getString("name"));
+                    System.out.println("names : " + childobj.getString("name"));
                 }
 
 
+                System.out.println("ArrayList size: " + pro.size());
 
-                System.out.println("ArrayList size: "+pro.size());
 
-
-                adapt =  new CustomListAdapter(MainActivity.this,pro);
+                adapt = new CustomListAdapter(MainActivity.this, pro);
 
                 pltlst.setAdapter(adapt);
 
@@ -100,16 +132,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         //Toast.makeText(MainActivity.this,pro.get(position).getPname(),Toast.LENGTH_LONG).show();
 
-                        Bundle bundle =  new Bundle();
-                        bundle.putParcelable("data",pro.get(position));
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("data", pro.get(position));
 
 
-                        Intent i = new Intent(MainActivity.this,Repo_description.class);
-                        i.putExtra("data",pro.get(position));
+                        Intent i = new Intent(MainActivity.this, Repo_description.class);
+                        i.putExtra("data", pro.get(position));
                         startActivity(i);
                     }
                 });
-
 
 
             } catch (ExecutionException e) {
@@ -119,6 +150,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
+        }
     }
 }
